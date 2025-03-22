@@ -120,17 +120,40 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 5px;
 }
 
 .btnsTips_container div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
   width: 70px;
   min-width: 70px;
   max-width: 130px;
   flex-basis: 49%;
-  margin: 2px 5px;
+  margin: 4px 5px;
+}
+
+.btnsTips_container div span {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30px;
+  height: 20px;
+  min-height: 20px;
+  min-width: 30px;
+  font-size: 14px;
+  margin-right: 10px;
+  border: 1px solid gray;
+  border-radius: 25%;
+  background-color: lightgray;
+}
+
+.lCtrl {
+  width: 80px;
+  min-width: 80px !important;
+  border-radius: 5% !important;
 }
 
 .btns_container {
