@@ -19,7 +19,6 @@ let timeoutSec = dropSpeed[0];
 const cells = document.querySelectorAll(".grid>div");
 
 function start() {
-  // alert("Start Button clicked!");
   initKeydown();
   initTouch();
 
@@ -42,7 +41,16 @@ function start() {
   }
 }
 
+function handleOrientationChange() {
+  if (screen.orientation.type.includes("landscape")) {
+    document.body.style.transform = "rotate(90deg)";
+  } else {
+    document.body.style.transform = "rotate(0deg)";
+  }
+}
+
 document.getElementById("startButton").addEventListener("click", start);
+window.addEventListener("orientationchange", handleOrientationChange);
 
 function initKeydown() {
   document.addEventListener("keydown", onKeydown);
