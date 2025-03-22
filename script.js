@@ -30,6 +30,7 @@ function start() {
     let restart = confirm("Start a new game?");
     if (restart) {
       tetris.currentTurn = 0;
+      document.getElementById("score_id").innerHTML = `Score: 0`;
       isStarted = false;
       gameOver();
       timeoutIdRestart = setTimeout(() => {
