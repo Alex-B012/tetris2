@@ -189,8 +189,8 @@ button:hover {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   body {
-    scale: 0.7;
+    scale: 0.8;
   }
 }
