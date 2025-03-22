@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment files
+.env
+
+
+# React / Vue / Angular
+node_modules/
+dist/
+build/
+*.log
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Build output directories
+/build/
+/dist/
+/out/
+
+# IDE and editor settings
+.vscode/
+/.idea/
+
+# Operating System files
+*.bak
+*.swp
