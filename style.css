@@ -198,7 +198,7 @@ button:hover {
     margin-top: 10px;
   }
   .title {
-    margin: 0;
+    margin: -10px 0 -5px 0;
   }
   .grid > div {
     --cell-size: min(3vh, 6vw);
