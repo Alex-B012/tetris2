@@ -43,9 +43,9 @@ function start() {
 
 function handleOrientationChange() {
   if (screen.orientation.type.includes("landscape")) {
-    document.body.style.transform = "rotate(90deg)";
+    document.html.style.transform = "rotate(90deg)";
   } else {
-    document.body.style.transform = "rotate(0deg)";
+    document.html.style.transform = "rotate(0deg)";
   }
 }
 
