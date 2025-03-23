@@ -198,10 +198,10 @@ button:hover {
     margin-top: 10px;
   }
   .title {
-    margin: -10px 0 -5px 0;
+    margin: -8px 0 -5px 0;
   }
   .grid > div {
-    height: min(3vh, 6vw);
-    width: min(3vh, 6vw);
+    height: min(2.8vh, 5.6vw);
+    width: min(2.8vh, 5.6vw);
   }
 }
