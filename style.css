@@ -190,7 +190,7 @@ button:hover {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   body {
     scale: 0.9;
   }
@@ -201,8 +201,7 @@ button:hover {
     margin: -10px 0 -5px 0;
   }
   .grid > div {
-    --cell-size: min(3vh, 6vw);
-    height: var(--cell-size);
-    width: var(--cell-size);
+    height: min(3vh, 6vw);
+    width: min(3vh, 6vw);
   }
 }
