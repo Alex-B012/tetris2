@@ -204,4 +204,9 @@ button:hover {
     height: min(2.8vh, 5.6vw);
     width: min(2.8vh, 5.6vw);
   }
+  button {
+    width: 96px;
+    height: 30px;
+    font-size: 19px;
+  }
 }
