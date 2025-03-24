@@ -5,7 +5,8 @@ import {
   convertPositionToIndex,
   SAD,
   LEVEL_SCORES,
-  DROP_SPEED,
+  DROP_SPEED_PC,
+  DROP_SPEED_MOBILE,
 } from "./utilities.js";
 
 import {
@@ -21,8 +22,9 @@ let requestId;
 let timeoutId;
 let isStarted = false;
 let tetris = new Tetris();
-let timeoutIdRestart, startMusicTimeout;
-let timeoutSec = DROP_SPEED[0];
+let timeoutIdRestart;
+let dropSpeed = DROP_SPEED_PC;
+let timeoutSec = dropSpeed[0];
 
 const cells = document.querySelectorAll(".grid>div");
 
@@ -34,6 +36,8 @@ function isMobileDevice() {
 
 window.onload = function () {
   if (isMobileDevice()) {
+    dropSpeed = DROP_SPEED_MOBILE;
+    alert(dropSpeed);
     document.getElementById(
       "btnsTips_container_id"
     ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
@@ -41,6 +45,8 @@ window.onload = function () {
           <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
           <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
           </div>`;
+  } else {
+    alert(dropSpeed);
   }
 };
 
@@ -49,7 +55,7 @@ function setInitialState() {
   document.getElementById("score_id").innerHTML = `Score: 0`;
   document.getElementById("level").innerHTML = `Level: 1`;
   isStarted = false;
-  timeoutSec = DROP_SPEED[0];
+  timeoutSec = dropSpeed[0];
   changeTrack(1);
 }
 
@@ -78,7 +84,7 @@ function start() {
     isStarted = true;
     startRoundSound();
 
-    startMusicTimeout = setTimeout(() => startTrack(), 2000);
+    setTimeout(() => startTrack(), 2000);
     document.getElementById("startButton").innerHTML = "Restart";
   }
 }
@@ -210,44 +216,44 @@ function dropDown() {
 
 function startLoop() {
   if (tetris.score >= LEVEL_SCORES[LEVEL_SCORES.length - 1]) {
-    timeoutSec = DROP_SPEED[DROP_SPEED.length - 1];
+    timeoutSec = dropSpeed[dropSpeed.length - 1];
   } else if (
     tetris.score >= LEVEL_SCORES[7] &&
     tetris.score < LEVEL_SCORES[LEVEL_SCORES.length - 1]
   ) {
-    timeoutSec = DROP_SPEED[8];
+    timeoutSec = dropSpeed[8];
   } else if (
     tetris.score >= LEVEL_SCORES[6] &&
     tetris.score < LEVEL_SCORES[7]
   ) {
-    timeoutSec = DROP_SPEED[7];
+    timeoutSec = dropSpeed[7];
   } else if (
     tetris.score >= LEVEL_SCORES[5] &&
     tetris.score < LEVEL_SCORES[6]
   ) {
-    timeoutSec = DROP_SPEED[6];
+    timeoutSec = dropSpeed[6];
   } else if (
     tetris.score >= LEVEL_SCORES[4] &&
     tetris.score < LEVEL_SCORES[5]
   ) {
-    timeoutSec = DROP_SPEED[5];
+    timeoutSec = dropSpeed[5];
   } else if (
     tetris.score >= LEVEL_SCORES[3] &&
     tetris.score < LEVEL_SCORES[4]
   ) {
-    timeoutSec = DROP_SPEED[4];
+    timeoutSec = dropSpeed[4];
   } else if (
     tetris.score >= LEVEL_SCORES[2] &&
     tetris.score < LEVEL_SCORES[3]
   ) {
-    timeoutSec = DROP_SPEED[3];
+    timeoutSec = dropSpeed[3];
   } else if (
     tetris.score >= LEVEL_SCORES[1] &&
     tetris.score < LEVEL_SCORES[2]
   ) {
-    timeoutSec = DROP_SPEED[2];
+    timeoutSec = dropSpeed[2];
   } else if (tetris.score > LEVEL_SCORES[0]) {
-    timeoutSec = DROP_SPEED[1];
+    timeoutSec = dropSpeed[1];
   }
 
   console.log("Drop speed:", timeoutSec);
