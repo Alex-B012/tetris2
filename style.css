@@ -124,6 +124,10 @@ body {
   margin-bottom: 5px;
 }
 
+#btnsTips_container_id {
+  min-height: 86px;
+}
+
 .btnsTips_container div {
   display: flex;
   flex-direction: row;
