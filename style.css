@@ -159,6 +159,8 @@ body {
   min-width: 33px;
   height: 35px;
   min-height: 35px;
+  border: none;
+  border-radius: 0;
   background-color: rgb(255, 255, 255);
 }
 
