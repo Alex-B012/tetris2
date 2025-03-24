@@ -44,6 +44,14 @@ if (isMobileDevice()) {
           <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
           <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
           </div>`;
+} else {
+  document.getElementById(
+    "btnsTips_container_id"
+  ).innerHTML = `<div><span class="desktopSpan">&#8592</span> Move left</div>
+          <div><span class="desktopSpan">&#8594</span> Move right</div>
+          <div><span class="desktopSpan">&#8595</span> Move down</div>
+          <div><span class="desktopSpan">&#8593</span> Rotate</div>
+          <div><span  class="desktopSpan lCtrl">Left CTRL</span> Drop</div>`;
 }
 
 function setInitialState() {
