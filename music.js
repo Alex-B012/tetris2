@@ -40,7 +40,7 @@ export function ohhSound() {
 
 export function startTrack() {
   currentTrack.currentTime = 0;
-  currentTrack.volume = 0.2;
+  currentTrack.volume = 0.3;
   currentTrack.play();
 }
 
@@ -65,5 +65,5 @@ export function changeTrack(num) {
   } else if (num === 3) {
     currentTrack = energeticRock;
   }
-  currentTrack.volume = 0.2;
+  currentTrack.volume = 0.3;
 }
