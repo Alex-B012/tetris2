@@ -35,18 +35,16 @@ function isMobileDevice() {
   );
 }
 
-window.onload = function () {
-  if (isMobileDevice()) {
-    dropSpeed = DROP_SPEED_MOBILE;
-    document.getElementById(
-      "btnsTips_container_id"
-    ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
+if (isMobileDevice()) {
+  dropSpeed = DROP_SPEED_MOBILE;
+  document.getElementById(
+    "btnsTips_container_id"
+  ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
           <div><span class="mobileSpan">&#8594</span> Swipe right</div>
           <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
           <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
           </div>`;
-  }
-};
+}
 
 function setInitialState() {
   tetris.currentTurn = 0;
