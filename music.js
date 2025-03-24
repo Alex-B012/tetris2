@@ -20,7 +20,6 @@ export function nextLevelSound(currentLevel) {
   moveDownSoundNoVolume = true;
   applause.currentTime = 0;
   applause.play();
-  alert(currentLevel);
   if (currentLevel === 4 || currentLevel === 7) {
     stopTrack();
 
@@ -39,7 +38,7 @@ export function nextLevelSound(currentLevel) {
   setTimeout(() => {
     applause.pause();
     moveDownSoundNoVolume = false;
-  }, 3000);
+  }, 2900);
 }
 
 export function moveDownSound() {
