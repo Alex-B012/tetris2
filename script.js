@@ -20,9 +20,10 @@ import {
 let hammer;
 let requestId;
 let timeoutId;
+
 let isStarted = false;
 let tetris = new Tetris();
-let timeoutIdRestart;
+
 let dropSpeed = DROP_SPEED_PC;
 let timeoutSec = dropSpeed[0];
 
@@ -37,7 +38,6 @@ function isMobileDevice() {
 window.onload = function () {
   if (isMobileDevice()) {
     dropSpeed = DROP_SPEED_MOBILE;
-    alert(dropSpeed);
     document.getElementById(
       "btnsTips_container_id"
     ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
@@ -45,8 +45,6 @@ window.onload = function () {
           <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
           <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
           </div>`;
-  } else {
-    alert(dropSpeed);
   }
 };
 
@@ -69,7 +67,7 @@ function start() {
 
       document.getElementById("startButton").disabled = true;
 
-      timeoutIdRestart = setTimeout(() => {
+      setTimeout(() => {
         setInitialState();
         document.getElementById("startButton").disabled = false;
         start();
