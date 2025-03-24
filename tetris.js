@@ -8,6 +8,14 @@ import {
   LEVEL_SCORES,
 } from "./utilities.js";
 
+import {
+  nextLevelSound,
+  moveDownSound,
+  startTrack,
+  changeTrack,
+  stopTrack,
+} from "./music.js";
+
 export class Tetris {
   constructor() {
     this.playfield;
@@ -51,6 +59,7 @@ export class Tetris {
   }
 
   moveTetrominoDown() {
+    moveDownSound();
     this.tetromino.row += 1;
     if (!this.isValid()) {
       this.tetromino.row -= 1;
@@ -164,37 +173,60 @@ export class Tetris {
     });
   }
 
+  increaseScore() {
+    this.score += 1;
+    document.getElementById("score_id").innerHTML = `Score: ${this.score}`;
+  }
+
+  increaseLevel(newLevel) {
+    if (this.level < newLevel) {
+      this.level = newLevel;
+      nextLevelSound();
+    }
+  }
+
+  startNewTrack(num) {
+    stopTrack();
+    changeTrack(num);
+  }
+
+  showLevel() {
+    if (this.score >= LEVEL_SCORES[LEVEL_SCORES.length - 1]) {
+      this.increaseLevel(10);
+    } else if (
+      this.score >= LEVEL_SCORES[7] &&
+      this.score < LEVEL_SCORES[LEVEL_SCORES.length - 1]
+    ) {
+      this.increaseLevel(9);
+    } else if (this.score >= LEVEL_SCORES[6] && this.score < LEVEL_SCORES[7]) {
+      this.increaseLevel(8);
+    } else if (this.score >= LEVEL_SCORES[5] && this.score < LEVEL_SCORES[6]) {
+      this.increaseLevel(7);
+      this.startNewTrack(3);
+    } else if (this.score >= LEVEL_SCORES[4] && this.score < LEVEL_SCORES[5]) {
+      this.increaseLevel(6);
+    } else if (this.score >= LEVEL_SCORES[3] && this.score < LEVEL_SCORES[4]) {
+      this.increaseLevel(5);
+    } else if (this.score >= LEVEL_SCORES[2] && this.score < LEVEL_SCORES[3]) {
+      this.increaseLevel(4);
+      this.startNewTrack(2);
+    } else if (this.score >= LEVEL_SCORES[1] && this.score < LEVEL_SCORES[2]) {
+      this.increaseLevel(3);
+    } else if (this.score > LEVEL_SCORES[0]) {
+      this.increaseLevel(2);
+    }
+
+    document.getElementById("level").innerHTML = `Level: ${this.level}`;
+  }
+
   dropRowsAbove(rowToDelete) {
     for (let row = rowToDelete; row > 0; row--) {
       this.playfield[row] = this.playfield[row - 1];
     }
     this.playfield[0] = new Array(PLAYFIELD_COLUMNS).fill(0);
-    this.score += 1;
-    document.getElementById("score_id").innerHTML = `Score: ${this.score}`;
 
-    if (this.score >= LEVEL_SCORES[LEVEL_SCORES.length - 1]) {
-      this.level = 10;
-    } else if (
-      this.score >= LEVEL_SCORES[7] &&
-      this.score < LEVEL_SCORES[LEVEL_SCORES.length - 1]
-    ) {
-      this.level = 9;
-    } else if (this.score >= LEVEL_SCORES[6] && this.score < LEVEL_SCORES[7]) {
-      this.level = 8;
-    } else if (this.score >= LEVEL_SCORES[5] && this.score < LEVEL_SCORES[6]) {
-      this.level = 7;
-    } else if (this.score >= LEVEL_SCORES[4] && this.score < LEVEL_SCORES[5]) {
-      this.level = 6;
-    } else if (this.score >= LEVEL_SCORES[3] && this.score < LEVEL_SCORES[4]) {
-      this.level = 5;
-    } else if (this.score >= LEVEL_SCORES[2] && this.score < LEVEL_SCORES[3]) {
-      this.level = 4;
-    } else if (this.score >= LEVEL_SCORES[1] && this.score < LEVEL_SCORES[2]) {
-      this.level = 3;
-    } else if (this.score > LEVEL_SCORES[0]) {
-      this.level = 2;
-    }
-    document.getElementById("level").innerHTML = `Level: ${this.level}`;
+    this.increaseScore();
+    this.showLevel();
   }
 
   calculateGhostPosition() {

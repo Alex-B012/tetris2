@@ -75,5 +75,6 @@ export const SAD = [
 ];
 
 export const LEVEL_SCORES = [10, 20, 35, 55, 85, 115, 145, 185, 225];
+// export const LEVEL_SCORES = [1, 2, 3, 4, 5, 6, 7, 17, 19];
 
 export const DROP_SPEED = [1200, 1000, 800, 600, 550, 500, 450, 400, 350, 300];

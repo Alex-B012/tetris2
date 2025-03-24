@@ -8,12 +8,20 @@ import {
   DROP_SPEED,
 } from "./utilities.js";
 
+import {
+  startRoundSound,
+  ohhSound,
+  startTrack,
+  stopTrack,
+  changeTrack,
+} from "./music.js";
+
 let hammer;
 let requestId;
 let timeoutId;
 let isStarted = false;
 let tetris = new Tetris();
-let timeoutIdRestart;
+let timeoutIdRestart, startMusicTimeout;
 let timeoutSec = DROP_SPEED[0];
 
 const cells = document.querySelectorAll(".grid>div");
@@ -26,7 +34,6 @@ function isMobileDevice() {
 
 window.onload = function () {
   if (isMobileDevice()) {
-    console.log("This is a mobile device.");
     document.getElementById(
       "btnsTips_container_id"
     ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
@@ -34,8 +41,6 @@ window.onload = function () {
           <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
           <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
           </div>`;
-  } else {
-    console.log("This is a desktop device...");
   }
 };
 
@@ -45,6 +50,7 @@ function setInitialState() {
   document.getElementById("level").innerHTML = `Level: 1`;
   isStarted = false;
   timeoutSec = DROP_SPEED[0];
+  changeTrack(1);
 }
 
 function start() {
@@ -70,6 +76,9 @@ function start() {
 
     moveDown();
     isStarted = true;
+    startRoundSound();
+
+    startMusicTimeout = setTimeout(() => startTrack(), 2000);
     document.getElementById("startButton").innerHTML = "Restart";
   }
 }
@@ -304,12 +313,15 @@ function drawGhostTetromino() {
 }
 
 function gameOver() {
+  alert;
   isStarted = false;
   stopLoop();
   gameOverAnimation();
   document.removeEventListener("keydown", onKeydown);
   hammer.off("panstart panleft panright pandown swipedown tap");
   document.getElementById("startButton").innerHTML = "Start";
+  stopTrack();
+  ohhSound();
 }
 
 function gameOverAnimation() {
