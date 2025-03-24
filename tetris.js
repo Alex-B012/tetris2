@@ -5,6 +5,7 @@ import {
   TETROMINOES,
   getRandomElement,
   rotateMatrix,
+  LEVEL_SCORES,
 } from "./utilities.js";
 
 export class Tetris {
@@ -15,6 +16,7 @@ export class Tetris {
     this.init();
     this.score = 0;
     this.currentTurn = 0;
+    this.level = 1;
   }
 
   init() {
@@ -169,6 +171,30 @@ export class Tetris {
     this.playfield[0] = new Array(PLAYFIELD_COLUMNS).fill(0);
     this.score += 1;
     document.getElementById("score_id").innerHTML = `Score: ${this.score}`;
+
+    if (this.score >= LEVEL_SCORES[LEVEL_SCORES.length - 1]) {
+      this.level = 10;
+    } else if (
+      this.score >= LEVEL_SCORES[7] &&
+      this.score < LEVEL_SCORES[LEVEL_SCORES.length - 1]
+    ) {
+      this.level = 9;
+    } else if (this.score >= LEVEL_SCORES[6] && this.score < LEVEL_SCORES[7]) {
+      this.level = 8;
+    } else if (this.score >= LEVEL_SCORES[5] && this.score < LEVEL_SCORES[6]) {
+      this.level = 7;
+    } else if (this.score >= LEVEL_SCORES[4] && this.score < LEVEL_SCORES[5]) {
+      this.level = 6;
+    } else if (this.score >= LEVEL_SCORES[3] && this.score < LEVEL_SCORES[4]) {
+      this.level = 5;
+    } else if (this.score >= LEVEL_SCORES[2] && this.score < LEVEL_SCORES[3]) {
+      this.level = 4;
+    } else if (this.score >= LEVEL_SCORES[1] && this.score < LEVEL_SCORES[2]) {
+      this.level = 3;
+    } else if (this.score > LEVEL_SCORES[0]) {
+      this.level = 2;
+    }
+    document.getElementById("level").innerHTML = `Level: ${this.level}`;
   }
 
   calculateGhostPosition() {

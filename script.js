@@ -4,6 +4,8 @@ import {
   PLAYFIELD_ROWS,
   convertPositionToIndex,
   SAD,
+  LEVEL_SCORES,
+  DROP_SPEED,
 } from "./utilities.js";
 
 let hammer;
@@ -11,42 +13,72 @@ let requestId;
 let timeoutId;
 let isStarted = false;
 let tetris = new Tetris();
-
-const dropSpeed = [1200, 1000, 800, 600, 550, 500, 450, 400, 350, 300];
-const scoreLimit = [5, 10, 15, 25, 45, 65, 85, 125, 185];
-let timeoutSec = dropSpeed[0];
+let timeoutIdRestart;
+let timeoutSec = DROP_SPEED[0];
 
 const cells = document.querySelectorAll(".grid>div");
 
-function start() {
-  initKeydown();
-  initTouch();
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(
+    navigator.userAgent
+  );
+}
 
-  moveDown();
-  if (tetris.currentTurn > 0) isStarted = true;
-  document.getElementById("startButton").innerHTML = "Restart";
+window.onload = function () {
+  if (isMobileDevice()) {
+    console.log("This is a mobile device.");
+    document.getElementById(
+      "btnsTips_container_id"
+    ).innerHTML = `<div><span class="mobileSpan">&#8592</span> Swipe left</div>
+          <div><span class="mobileSpan">&#8594</span> Swipe right</div>
+          <div><span class="mobileSpan">&#8595 / Drop </span> Swipe down</div>
+          <div><span class="mobileSpan mobileSpanPointer">&#9757</span> Rotate</div>
+          </div>`;
+  } else {
+    console.log("This is a desktop device...");
+  }
+};
+
+function setInitialState() {
+  tetris.currentTurn = 0;
+  document.getElementById("score_id").innerHTML = `Score: 0`;
+  document.getElementById("level").innerHTML = `Level: 1`;
+  isStarted = false;
+  timeoutSec = DROP_SPEED[0];
+}
+
+function start() {
+  console.log("isStarted", isStarted);
 
   if (isStarted) {
     let restart = confirm("Start a new game?");
     if (restart) {
-      tetris.currentTurn = 0;
-      document.getElementById("score_id").innerHTML = `Score: 0`;
-      isStarted = false;
       gameOver();
+
+      document.getElementById("startButton").disabled = true;
+
       timeoutIdRestart = setTimeout(() => {
-        tetris = new Tetris();
-        timeoutSec = initTimeoutSec;
+        setInitialState();
+        document.getElementById("startButton").disabled = false;
         start();
       }, 3000);
     }
+  } else {
+    tetris = new Tetris();
+    initKeydown();
+    initTouch();
+
+    moveDown();
+    isStarted = true;
+    document.getElementById("startButton").innerHTML = "Restart";
   }
 }
 
 function handleOrientationChange() {
   if (screen.orientation.type.includes("landscape")) {
-    document.html.style.transform = "rotate(90deg)";
+    document.body.style.transform = "rotate(90deg)";
   } else {
-    document.html.style.transform = "rotate(0deg)";
+    document.body.style.transform = "rotate(0deg)";
   }
 }
 
@@ -168,27 +200,45 @@ function dropDown() {
 }
 
 function startLoop() {
-  if (tetris.score >= scoreLimit[scoreLimit.length - 1]) {
-    timeoutSec = dropSpeed[dropSpeed.length - 1];
+  if (tetris.score >= LEVEL_SCORES[LEVEL_SCORES.length - 1]) {
+    timeoutSec = DROP_SPEED[DROP_SPEED.length - 1];
   } else if (
-    tetris.score >= scoreLimit[7] &&
-    tetris.score < scoreLimit[scoreLimit.length - 1]
+    tetris.score >= LEVEL_SCORES[7] &&
+    tetris.score < LEVEL_SCORES[LEVEL_SCORES.length - 1]
   ) {
-    timeoutSec = dropSpeed[8];
-  } else if (tetris.score >= scoreLimit[6] && tetris.score < scoreLimit[7]) {
-    timeoutSec = dropSpeed[7];
-  } else if (tetris.score >= scoreLimit[5] && tetris.score < scoreLimit[6]) {
-    timeoutSec = dropSpeed[6];
-  } else if (tetris.score >= scoreLimit[4] && tetris.score < scoreLimit[5]) {
-    timeoutSec = dropSpeed[5];
-  } else if (tetris.score >= scoreLimit[3] && tetris.score < scoreLimit[4]) {
-    timeoutSec = dropSpeed[4];
-  } else if (tetris.score >= scoreLimit[2] && tetris.score < scoreLimit[3]) {
-    timeoutSec = dropSpeed[3];
-  } else if (tetris.score >= scoreLimit[1] && tetris.score < scoreLimit[2]) {
-    timeoutSec = dropSpeed[2];
-  } else if (tetris.score > scoreLimit[0]) {
-    timeoutSec = dropSpeed[1];
+    timeoutSec = DROP_SPEED[8];
+  } else if (
+    tetris.score >= LEVEL_SCORES[6] &&
+    tetris.score < LEVEL_SCORES[7]
+  ) {
+    timeoutSec = DROP_SPEED[7];
+  } else if (
+    tetris.score >= LEVEL_SCORES[5] &&
+    tetris.score < LEVEL_SCORES[6]
+  ) {
+    timeoutSec = DROP_SPEED[6];
+  } else if (
+    tetris.score >= LEVEL_SCORES[4] &&
+    tetris.score < LEVEL_SCORES[5]
+  ) {
+    timeoutSec = DROP_SPEED[5];
+  } else if (
+    tetris.score >= LEVEL_SCORES[3] &&
+    tetris.score < LEVEL_SCORES[4]
+  ) {
+    timeoutSec = DROP_SPEED[4];
+  } else if (
+    tetris.score >= LEVEL_SCORES[2] &&
+    tetris.score < LEVEL_SCORES[3]
+  ) {
+    timeoutSec = DROP_SPEED[3];
+  } else if (
+    tetris.score >= LEVEL_SCORES[1] &&
+    tetris.score < LEVEL_SCORES[2]
+  ) {
+    timeoutSec = DROP_SPEED[2];
+  } else if (tetris.score > LEVEL_SCORES[0]) {
+    timeoutSec = DROP_SPEED[1];
   }
 
   console.log("Drop speed:", timeoutSec);
@@ -254,10 +304,11 @@ function drawGhostTetromino() {
 }
 
 function gameOver() {
+  isStarted = false;
   stopLoop();
+  gameOverAnimation();
   document.removeEventListener("keydown", onKeydown);
   hammer.off("panstart panleft panright pandown swipedown tap");
-  gameOverAnimation();
   document.getElementById("startButton").innerHTML = "Start";
 }
 
