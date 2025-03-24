@@ -219,7 +219,7 @@ button:disabled {
     margin-top: 10px;
   }
   .title {
-    margin: -8px 0 -5px 0;
+    margin: -8px 0 0 0;
   }
   .grid > div {
     height: min(2.8vh, 5.6vw);
