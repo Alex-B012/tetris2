@@ -16,15 +16,29 @@ export function startRoundSound() {
   }, 2000);
 }
 
-export function nextLevelSound() {
-  pauseTrack();
+export function nextLevelSound(currentLevel) {
   moveDownSoundNoVolume = true;
   applause.currentTime = 0;
   applause.play();
+  alert(currentLevel);
+  if (currentLevel === 4 || currentLevel === 7) {
+    stopTrack();
+
+    if (currentLevel === 4) changeTrack(2);
+    if (currentLevel === 7) changeTrack(3);
+
+    setTimeout(() => {
+      startTrack();
+    }, 3000);
+  } else {
+    pauseTrack();
+    setTimeout(() => {
+      continueTrack();
+    }, 3000);
+  }
   setTimeout(() => {
     applause.pause();
     moveDownSoundNoVolume = false;
-    continueTrack();
   }, 3000);
 }
 

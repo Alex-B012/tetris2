@@ -8,12 +8,7 @@ import {
   LEVEL_SCORES,
 } from "./utilities.js";
 
-import {
-  nextLevelSound,
-  moveDownSound,
-  changeTrack,
-  stopTrack,
-} from "./music.js";
+import { nextLevelSound, moveDownSound } from "./music.js";
 
 export class Tetris {
   constructor() {
@@ -180,13 +175,8 @@ export class Tetris {
   increaseLevel(newLevel) {
     if (this.level < newLevel) {
       this.level = newLevel;
-      nextLevelSound();
+      nextLevelSound(newLevel);
     }
-  }
-
-  startNewTrack(num) {
-    stopTrack();
-    setTimeout(() => changeTrack(num), 500);
   }
 
   showLevel() {
@@ -201,14 +191,12 @@ export class Tetris {
       this.increaseLevel(8);
     } else if (this.score >= LEVEL_SCORES[5] && this.score < LEVEL_SCORES[6]) {
       this.increaseLevel(7);
-      this.startNewTrack(3);
     } else if (this.score >= LEVEL_SCORES[4] && this.score < LEVEL_SCORES[5]) {
       this.increaseLevel(6);
     } else if (this.score >= LEVEL_SCORES[3] && this.score < LEVEL_SCORES[4]) {
       this.increaseLevel(5);
     } else if (this.score >= LEVEL_SCORES[2] && this.score < LEVEL_SCORES[3]) {
       this.increaseLevel(4);
-      this.startNewTrack(2);
     } else if (this.score >= LEVEL_SCORES[1] && this.score < LEVEL_SCORES[2]) {
       this.increaseLevel(3);
     } else if (this.score > LEVEL_SCORES[0]) {
