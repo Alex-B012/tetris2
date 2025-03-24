@@ -11,7 +11,6 @@ import {
 import {
   nextLevelSound,
   moveDownSound,
-  startTrack,
   changeTrack,
   stopTrack,
 } from "./music.js";
@@ -187,7 +186,7 @@ export class Tetris {
 
   startNewTrack(num) {
     stopTrack();
-    changeTrack(num);
+    setTimeout(() => changeTrack(num), 500);
   }
 
   showLevel() {

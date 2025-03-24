@@ -18,22 +18,9 @@ body {
 }
 
 .title {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 20px 0;
   font-weight: bold;
   font-size: 30px;
-}
-
-.scoreLevel_div {
-  width: 297px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-}
-#score_id,
-#level {
-  margin: 10px;
-  font-weight: bold;
 }
 
 .grid {
@@ -108,9 +95,22 @@ body {
   animation: hide 0.5s;
 }
 
+.scoreLevel_div {
+  width: 297px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 5px;
+}
+#score_id,
+#level {
+  margin: 10px;
+  font-weight: bold;
+}
+
 .tips_container {
   text-align: center;
-  margin-top: 15px;
 }
 
 .btnsTips_container {
