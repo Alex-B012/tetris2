@@ -131,7 +131,6 @@ body {
 .btnsTips_container div {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
   text-align: center;
   width: 70px;
@@ -223,7 +222,7 @@ button:disabled {
     margin-top: 10px;
   }
   .title {
-    margin: -8px 0 0 0;
+    margin: -8px 0 5px 0;
   }
   .grid > div {
     height: min(2.8vh, 5.6vw);
