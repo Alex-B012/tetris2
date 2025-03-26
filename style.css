@@ -101,7 +101,6 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  margin-top: 5px;
 }
 #score_id,
 #level {
@@ -224,7 +223,7 @@ button {
   background-color: rgb(0, 128, 0);
   color: white;
   text-align: center;
-  margin: 0 5px;
+  margin: 0 5px 15px 5px;
   border-radius: 50px;
 }
 
@@ -242,7 +241,7 @@ button:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 12px;
 }
 
