@@ -18,7 +18,7 @@ body {
 }
 
 .title {
-  margin: 10px 0 20px 0;
+  margin: 7px 0 20px 0;
   font-weight: bold;
   font-size: 30px;
 }
@@ -147,7 +147,7 @@ body {
 
 .tips_container {
   text-align: center;
-  margin-top: -5px;
+  margin-top: -8px;
 }
 
 .btnsTips_container {
