@@ -107,6 +107,43 @@ body {
 #level {
   margin: 10px;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+}
+
+#levelNumOuter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  margin-left: 2px;
+}
+
+.levelNumOuterColor {
+  background-color: rgba(1, 8, 89, 0.8);
+}
+
+#levelNumInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 17px;
+  min-width: 17px;
+  height: 16px;
+  text-align: center;
+}
+
+.levelNumInnerColor {
+  color: white;
 }
 
 .tips_container {
@@ -200,6 +237,15 @@ button:disabled {
   background-color: rgba(191, 191, 191, 0.5);
 }
 
+#credits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
 @keyframes hide {
   0% {
     transform: scale(0.8) rotate(30deg);
@@ -222,7 +268,7 @@ button:disabled {
     margin-top: 10px;
   }
   .title {
-    margin: -8px 0 5px 0;
+    margin: -5px 0 5px 0;
   }
   .grid > div {
     height: min(2.8vh, 5.6vw);

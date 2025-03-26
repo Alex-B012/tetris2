@@ -57,7 +57,7 @@ if (isMobileDevice()) {
 function setInitialState() {
   tetris.currentTurn = 0;
   document.getElementById("score_id").innerHTML = `Score: 0`;
-  document.getElementById("level").innerHTML = `Level: 1`;
+  document.getElementById("levelNumInner").innerHTML = `1`;
   isStarted = false;
   timeoutSec = dropSpeed[0];
   changeTrack(1);
@@ -74,12 +74,13 @@ function start() {
       document.getElementById("startButton").disabled = true;
 
       setTimeout(() => {
-        setInitialState();
+        // setInitialState();
         document.getElementById("startButton").disabled = false;
         start();
       }, 3000);
     }
   } else {
+    setInitialState();
     tetris = new Tetris();
     initKeydown();
     initTouch();

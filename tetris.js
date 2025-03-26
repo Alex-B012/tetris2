@@ -176,6 +176,23 @@ export class Tetris {
     if (this.level < newLevel) {
       this.level = newLevel;
       nextLevelSound(newLevel);
+      let levelNumOuter = document.getElementById("levelNumOuter");
+      let levelNumInner = document.getElementById("levelNumInner");
+      if (levelNumOuter) levelNumOuter.classList.add("levelNumOuterColor");
+      if (levelNumInner) levelNumInner.classList.add("levelNumInnerColor");
+      const tempLevel = this.level;
+      setTimeout(() => {
+        levelNumInner.textContent = "";
+      }, 1000);
+      setTimeout(function () {
+        levelNumInner.textContent = `${tempLevel}`;
+        setTimeout(function () {
+          if (levelNumOuter)
+            levelNumOuter.classList.remove("levelNumOuterColor");
+          if (levelNumInner)
+            levelNumInner.classList.remove("levelNumInnerColor");
+        }, 1000);
+      }, 2000);
     }
   }
 
@@ -203,7 +220,7 @@ export class Tetris {
       this.increaseLevel(2);
     }
 
-    document.getElementById("level").innerHTML = `Level: ${this.level}`;
+    // document.getElementById("levelNumInner").innerHTML = `${this.level}`;
   }
 
   dropRowsAbove(rowToDelete) {
