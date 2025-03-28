@@ -74,7 +74,6 @@ function start() {
       document.getElementById("startButton").disabled = true;
 
       setTimeout(() => {
-        // setInitialState();
         document.getElementById("startButton").disabled = false;
         start();
       }, 3000);
@@ -95,7 +94,7 @@ function start() {
 }
 
 function handleOrientationChange() {
-  if (screen.orientation.type.includes("landscape")) {
+  if (screen.orientation.type.includes("landscape") && isMobileDevice()) {
     document.body.style.transform = "rotate(90deg)";
   } else {
     document.body.style.transform = "rotate(0deg)";
